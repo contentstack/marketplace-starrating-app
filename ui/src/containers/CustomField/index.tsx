@@ -31,16 +31,16 @@ const CustomField: React.FC = function () {
 
       const initialData = appSdk.location?.CustomField?.field?.getData();
 
-      if (initialData && !isEmpty(initialData)) {
-        setRatingValue(initialData);
+      if (initialData && !isEmpty(initialData) && initialData.value) {
+        setRatingValue({value: initialData.value * 20});
       }
     });
   }, []);
 
   const onChangeSave = (ratings: number) => {
-    const saveData = { value: ratings };
-    setRatingValue(saveData);
-    state.location?.CustomField?.field?.setData(saveData);
+   
+    setRatingValue({value: ratings});
+    state.location?.CustomField?.field?.setData({ value: ratings / 20 });
   };
 
   return (
