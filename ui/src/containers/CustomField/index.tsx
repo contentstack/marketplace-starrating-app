@@ -32,14 +32,13 @@ const CustomField: React.FC = function () {
       const initialData = appSdk.location?.CustomField?.field?.getData();
 
       if (initialData && !isEmpty(initialData) && initialData.value) {
-        setRatingValue({value: initialData.value * 20});
+        setRatingValue({ value: initialData.value * 20 });
       }
     });
   }, []);
 
   const onChangeSave = (ratings: number) => {
-   
-    setRatingValue({value: ratings});
+    setRatingValue({ value: ratings });
     state.location?.CustomField?.field?.setData({ value: ratings / 20 });
   };
 
