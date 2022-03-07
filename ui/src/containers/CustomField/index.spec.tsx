@@ -9,12 +9,10 @@ beforeAll(async () => {
 });
 
 describe(`UI Elements of Custom Field Screen`, () => {
-  elementsToTest.forEach(e => {
+  elementsToTest.forEach((e) => {
     test(`Testing ${e} element`, async () => {
       await expect(
-        waitFor(() =>
-          customFieldDom?.container.querySelector()
-        )
+        waitFor(() => customFieldDom?.container.querySelector())
       ).toBeTruthy();
     });
   });
