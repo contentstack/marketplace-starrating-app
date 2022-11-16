@@ -1,3 +1,6 @@
+# build command format is
+# bash build.sh
+
 set -e
 #The above command is to fail build if any one of the below build steps fail
 
