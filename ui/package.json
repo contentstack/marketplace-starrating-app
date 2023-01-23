@@ -16,7 +16,8 @@
     "react-simple-star-rating": "^4.0.5",
     "sass": "^1.43.4",
     "typescript": "^4.5.2",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "@snyk/protect": "latest"
   },
   "scripts": {
     "start": "export PORT=4000 && react-scripts start",
@@ -25,7 +26,9 @@
     "eject": "react-scripts eject",
     "prettify": "prettier --write .",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx . --ignore-pattern './node_modules/' --ignore-pattern './buid/'",
-    "precommit": "npm run prettify && npm run lint:fix"
+    "precommit": "npm run prettify && npm run lint:fix",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "eslintConfig": {
     "extends": [
@@ -69,5 +72,6 @@
     "jest": "26.6.0",
     "jest-fetch-mock": "^3.0.3",
     "ts-jest": "^26.5.6"
-  }
+  },
+  "snyk": true
 }
