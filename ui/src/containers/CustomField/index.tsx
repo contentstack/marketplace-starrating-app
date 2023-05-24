@@ -47,8 +47,8 @@ const CustomField: React.FC = function () {
       {state.appSdkInitialized && (
         <Rating
           showTooltip
-          allowHalfIcon
-          ratingValue={ratingValue.value}
+          allowFraction
+          initialValue={ratingValue.value}
           onClick={onChangeSave}
           fillColorArray={constants.fillColorArray}
         />
