@@ -6,7 +6,7 @@ const ENV: string = process.env.NODE_ENV || "";
 /**
  * useAnalytics hook to track user actions and events in application
  */
-export const useAnalytics = () => {
+const useAnalytics = () => {
   const [appSDK] = useAppSdk();
   const trackEvent = useCallback(
     (event: string, eventData: any = {}) => {
@@ -19,3 +19,5 @@ export const useAnalytics = () => {
 
   return { trackEvent };
 };
+
+export default useAnalytics;

@@ -11,4 +11,5 @@ export const appSdkRefAtom = atom<Extension | null>(null);
  * Getter and setter for appSdk instance.
  * To be used during Sdk initialisation
  */
-export const useAppSdk = (): [Extension | null, Function] => useAtom(appSdkRefAtom);
+export const useAppSdk = (): [Extension | null, Function] =>
+  useAtom(appSdkRefAtom);

@@ -2,7 +2,7 @@ import React from "react";
 import { datadogRum } from "@datadog/browser-rum";
 
 interface MyProps {
-  children: any
+  children: any;
 }
 
 interface MyState {
@@ -13,7 +13,7 @@ const {
   REACT_APP_DATADOG_RUM_APPLICATION_ID: applicationId,
   REACT_APP_DATADOG_RUM_CLIENT_TOKEN: clientToken,
   REACT_APP_DATADOG_RUM_SITE: site,
-  REACT_APP_DATADOG_RUM_SERVICE: service
+  REACT_APP_DATADOG_RUM_SERVICE: service,
 } = process.env;
 
 datadogRum.init({
