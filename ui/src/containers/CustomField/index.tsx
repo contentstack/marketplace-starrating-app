@@ -38,8 +38,15 @@ const CustomField: React.FC = function () {
   }, []);
 
   const onChangeSave = (ratings: number) => {
+    console.info('ratings');
+    console.info(ratings);
     setRatingValue({ value: ratings });
+    console.info(state)
+    // const dummy = state.location?.CustomField?.field;
+    /* eslint-disable */
     state.location?.CustomField?.field?.setData({ value: ratings / 20 });
+    // state.location?.CustomField?.field?.setData({ value: ratings / 20 });
+    /* eslint-enable */
   };
 
   return (
@@ -47,8 +54,8 @@ const CustomField: React.FC = function () {
       {state.appSdkInitialized && (
         <Rating
           showTooltip
-          allowFraction
-          initialValue={ratingValue.value}
+          allowHalfIcon
+          ratingValue={ratingValue.value}
           onClick={onChangeSave}
           fillColorArray={constants.fillColorArray}
         />
