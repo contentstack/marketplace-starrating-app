@@ -38,10 +38,10 @@ const CustomField: React.FC = function () {
   }, []);
 
   const onChangeSave = (ratings: number) => {
-    console.info('ratings');
+    console.info("ratings");
     console.info(ratings);
     setRatingValue({ value: ratings });
-    console.info(state)
+    console.info(state);
     // const dummy = state.location?.CustomField?.field;
     /* eslint-disable */
     state.location?.CustomField?.field?.setData({ value: ratings / 20 });
