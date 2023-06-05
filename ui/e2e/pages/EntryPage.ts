@@ -72,7 +72,6 @@ export class EntryPage {
       .locator('span.react-simple-star-rating-tooltip')
       .first()
       .innerText()).toBe("4");
-    await this.page.waitForTimeout(4000);
   }
 
   getFrame(appName: string): FrameLocator {
