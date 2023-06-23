@@ -45,7 +45,7 @@ class ErrorBoundary extends React.Component<MyProps, MyState> {
     return { hasError: true };
   }
 
-  componentDidCatch(error: any, errorInfo: any) {
+  componentDidCatch(error: any) {
     // You can also log the error to an error reporting service
     datadogRum.addError(error);
   }
