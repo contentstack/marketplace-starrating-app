@@ -38,40 +38,6 @@ const writeFile = async (obj: any) => {
     .catch((error: any) => console.error(error));
 };
 
-// Upload an asset to the stack
-export const assetUpload = async (stackApiKey: string | undefined, authToken: string) => {
-  const assetPath = await path.resolve(__dirname, '../../public/logo192.png');
-  const readFile = await fs.createReadStream(assetPath);
-  const form = new FormData();
-  form.append('asset[upload]', readFile, 'test-asset');
-  let options = {
-    headers: { 'Content-Type': 'multipart/form-data', api_key: stackApiKey, authtoken: authToken, ...form.getHeaders() },
-    data: form,
-  };
-  try {
-    return await axios.post(`https://${BASE_API_URL}/v3/assets`, form, options);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const deleteAsset = async (authToken: string, assetUid: string) => {
-  let options = {
-    url: `https://${BASE_API_URL}/v3/assets/${assetUid}`,
-    method: 'DELETE',
-    headers: {
-      api_key: STACK_API_KEY,
-      authtoken: authToken,
-      'Content-type': 'application/json',
-    },
-  };
-  try {
-    return await axios(options);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 // get authtoken
 export const getAuthToken = async () => {
   let options = {
@@ -108,7 +74,7 @@ export const createApp = async (authToken: string) => {
       authtoken: authToken,
     },
     data: {
-      name: `App Boilerplate ${Math.floor(Math.random() * 1000)}`,
+      name: `Star rating ${Math.floor(Math.random() * 1000)}`,
       target_type: 'stack',
     },
   };
@@ -122,7 +88,7 @@ export const createApp = async (authToken: string) => {
 
 // updating app in developer hub & set baseUrl
 export const updateApp = async (authToken: string, appId: string): Promise<any> => {
-  const name = `App Boilerplate _${Math.floor(Math.random() * 1000)}`;
+  const name = `Star rating ${Math.floor(Math.random() * 1000)}`;
   let options = {
     url: `https://${DEVELOPER_HUB_API}/apps/${appId}`,
     method: 'PUT',
@@ -277,7 +243,7 @@ export const createContentType = async (authToken: string, extension_uid: Extens
             multiple: false,
           },
           {
-            display_name: 'App Boilerplate',
+            display_name: 'Star_rating',
             uid: 'rating',
             data_type: 'json',
             extension_uid: extension_uid,
