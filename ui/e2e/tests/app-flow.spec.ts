@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 
-import { createContentType, createEntry, createApp, updateApp, installApp, assetUpload, uninstallApp, deleteApp, deleteContentType, entryPageFlow, initializeEntry, getExtensionFieldUid, deleteAsset } from '../utils/helper';
+import { createContentType, createEntry, createApp, updateApp, installApp, uninstallApp, deleteApp, deleteContentType, entryPageFlow, initializeEntry, getExtensionFieldUid } from '../utils/helper';
 
 const jsonFile = require('jsonfile');
 
