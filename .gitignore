@@ -25,3 +25,7 @@ to-deploy/
 
 .eslintcache
 .dccache
+.env
+ui/.env
+playwright-report
+storageState.json
