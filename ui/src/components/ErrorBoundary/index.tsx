@@ -16,6 +16,8 @@ const {
   REACT_APP_DATADOG_RUM_SERVICE: service,
 } = process.env;
 
+const ENV: string = process.env.NODE_ENV || "";
+
 datadogRum.init({
   applicationId: `${applicationId}`,
   clientToken: `${clientToken}`,
@@ -47,6 +49,10 @@ class ErrorBoundary extends React.Component<MyProps, MyState> {
 
   componentDidCatch(error: any) {
     // You can also log the error to an error reporting service
+    if (ENV === "development") {
+      console.error(error);
+      return;
+    }
     datadogRum.addError(error);
   }
 
