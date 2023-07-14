@@ -35,5 +35,6 @@ module.exports = {
     "react/destructuring-assignment": ["warn"],
     "func-names": [0],
     "no-console": ["error", { allow: ["warn", "error", "info"] }],
+    "no-underscore-dangle": "off",
   },
 };
