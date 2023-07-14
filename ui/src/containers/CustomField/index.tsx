@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ContentstackAppSdk from "@contentstack/app-sdk";
-import { isEmpty } from "lodash";
+import { isEmpty, get } from "lodash";
 import { Rating } from "react-simple-star-rating";
 import { TypeSDKData, TypeStarRatingData } from "../../common/types";
 import constants, { eventNames } from "../../common/constants";
 import useAnalytics from "../../common/hooks/useAnalytics";
 import "./styles.scss";
+import getAppLocation from "../../common/functions";
+import useJsErrorTracker from "../../common/hooks/useJsErrorTracker";
 
 const CustomField: React.FC = function () {
   const [state, setState] = useState<TypeSDKData>({
@@ -13,6 +15,8 @@ const CustomField: React.FC = function () {
     location: {},
     appSdkInitialized: false,
   });
+  // error tracking hooks
+  const { setErrorsMetaData, trackError } = useJsErrorTracker();
   const [ratingValue, setRatingValue] = useState<TypeStarRatingData>({
     value: 0,
   });
@@ -37,8 +41,17 @@ const CustomField: React.FC = function () {
       }
       
       trackEvent(APP_INITIALIZE_SUCCESS);
+      const appLocation: string = getAppLocation(appSdk);
+      const properties = {
+          Stack: appSdk?.stack._data.api_key,
+          Organization: appSdk?.currentUser.defaultOrganization,
+          "App Location": appLocation,
+          "User Id": get(appSdk, "stack._data.collaborators.0.uid", ""), // first uuid from collaborators
+        };
+        setErrorsMetaData(properties); // set global event data for errors
     })
     .catch((error) => {
+       trackError(error);
       console.error(constants.appSdkError, error); 
       trackEvent(APP_INITIALIZE_FAILURE);
     });
