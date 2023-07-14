@@ -4,7 +4,7 @@ import { get, isEmpty, keys } from "lodash";
 function getAppLocation(sdk: Extension): string {
   const locations = keys(sdk?.location);
   let locationName = "";
-  for (let i = 0; i <= locations.length; i++) {
+  for (let i = 0; i <=locations.length; i+=1) {
     if (!isEmpty(get(sdk, `location.${locations[i]}`, undefined))) {
       locationName = locations[i];
       break;
