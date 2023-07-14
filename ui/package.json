@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@contentstack/app-sdk": "^1.5.0",
-    "@contentstack/venus-components": "^1.4.8",
+    "@contentstack/venus-components": "^2.1.0",
     "@datadog/browser-rum": "^4.42.1",
     "@types/node": "^20.3.3",
     "@types/react": "^18.2.14",
