@@ -62,6 +62,7 @@ export class EntryPage {
 
   async validateChangeRating(appName: string) {
     const frame = this.getFrame(appName);
+    await frame.locator('span.react-simple-star-rating').first().click();
     expect(await frame
       .locator('span.react-simple-star-rating')
       .first()
@@ -71,7 +72,7 @@ export class EntryPage {
     expect(await frame
       .locator('span.react-simple-star-rating-tooltip')
       .first()
-      .innerText()).toBe("4");
+      .innerText()).toBe("2.5");
   }
 
   getFrame(appName: string): FrameLocator {
