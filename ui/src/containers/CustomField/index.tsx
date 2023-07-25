@@ -17,7 +17,7 @@ const CustomField: React.FC = function () {
   });
   // error tracking hooks
   const { setErrorsMetaData, trackError } = useJsErrorTracker();
-  const [ratingValue, setRatingValue] = useState<number>(0);
+  const [, setRatingValue] = useState<number>(0);
   const { trackEvent } = useAnalytics();
   const { APP_INITIALIZE_SUCCESS, APP_INITIALIZE_FAILURE } = eventNames;
 
@@ -67,7 +67,7 @@ const CustomField: React.FC = function () {
         <Rating
           showTooltip
           allowHalfIcon
-          ratingValue={ratingValue}
+          ratingValue={state.location?.CustomField?.field?.getData()}
           onClick={onChangeSave}
           fillColorArray={constants.fillColorArray}
         />
