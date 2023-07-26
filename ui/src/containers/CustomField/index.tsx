@@ -4,10 +4,10 @@ import { isEmpty, get } from "lodash";
 import { Rating } from "react-simple-star-rating";
 import { TypeSDKData } from "../../common/types";
 import constants, { eventNames } from "../../common/constants";
-import useAnalytics from "../../common/hooks/useAnalytics";
 import "./styles.scss";
 import getAppLocation from "../../common/functions";
 import useJsErrorTracker from "../../common/hooks/useJsErrorTracker";
+import { useAppSdk } from "../../common/hooks/useAppSdk";
 
 const CustomField: React.FC = function () {
   const [state, setState] = useState<TypeSDKData>({
@@ -18,12 +18,13 @@ const CustomField: React.FC = function () {
   // error tracking hooks
   const { setErrorsMetaData, trackError } = useJsErrorTracker();
   const [, setRatingValue] = useState<number>(0);
-  const { trackEvent } = useAnalytics();
-  const { APP_INITIALIZE_SUCCESS, APP_INITIALIZE_FAILURE } = eventNames;
+  const { APP_INITIALIZE_SUCCESS } = eventNames;
+  const  [,setAppSdk] = useAppSdk();
 
   useEffect(() => {
     ContentstackAppSdk.init()
       .then(async (appSdk) => {
+        setAppSdk(appSdk);
         const config = await appSdk?.getConfig();
 
         setState({
@@ -37,8 +38,8 @@ const CustomField: React.FC = function () {
         if (!isEmpty(initialData)) {
           setRatingValue(initialData);
         }
-
-        trackEvent(APP_INITIALIZE_SUCCESS);
+         // @ts-ignore
+        appSdk?.pulse(APP_INITIALIZE_SUCCESS);
         const appLocation: string = getAppLocation(appSdk);
         const properties = {
           Stack: appSdk?.stack._data.api_key,
@@ -51,13 +52,12 @@ const CustomField: React.FC = function () {
       .catch((error) => {
         trackError(error);
         console.error(constants.appSdkError, error);
-        trackEvent(APP_INITIALIZE_FAILURE);
+        
       });
   }, []);
 
   const onChangeSave = (ratings: number) => {
     setRatingValue(ratings);
-
     state.location?.CustomField?.field?.setData(ratings/20);
   };
 
