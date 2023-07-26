@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import ContentstackAppSdk from "@contentstack/app-sdk";
 import { isEmpty, get } from "lodash";
 import { Rating } from "react-simple-star-rating";
-import { TypeSDKData, TypeStarRatingData } from "../../common/types";
+import { TypeSDKData } from "../../common/types";
 import constants, { eventNames } from "../../common/constants";
-import useAnalytics from "../../common/hooks/useAnalytics";
 import "./styles.scss";
 import getAppLocation from "../../common/functions";
 import useJsErrorTracker from "../../common/hooks/useJsErrorTracker";
@@ -17,65 +16,70 @@ const CustomField: React.FC = function () {
   });
   // error tracking hooks
   const { setErrorsMetaData, trackError } = useJsErrorTracker();
-  const [ratingValue, setRatingValue] = useState<TypeStarRatingData>({
-    value: 0,
-  });
-  const { trackEvent } = useAnalytics();
-  const { APP_INITIALIZE_SUCCESS, APP_INITIALIZE_FAILURE } = eventNames;
+  const [, setRatingValue] = useState<number>(0);
+  const { APP_INITIALIZE_SUCCESS } = eventNames;
   
+  const ENV: string = process.env.NODE_ENV || "";
+
   useEffect(() => {
-  ContentstackAppSdk.init()
-    .then(async (appSdk) => {
-      const config = await appSdk?.getConfig();
+    ContentstackAppSdk.init()
+      .then(async (appSdk) => {
+        const config = await appSdk?.getConfig();
 
-      setState({
-        config,
-        location: appSdk.location,
-        appSdkInitialized: true,
-      });
+        setState({
+          config,
+          location: appSdk.location,
+          appSdkInitialized: true,
+        });
 
-      const initialData = appSdk.location?.CustomField?.field?.getData();
+        const initialData = appSdk.location?.CustomField?.field?.getData();
 
-      if (initialData && !isEmpty(initialData) && initialData.value) {
-        setRatingValue({ value: initialData.value * 20 });
-      }
-      
-      trackEvent(APP_INITIALIZE_SUCCESS);
-      const appLocation: string = getAppLocation(appSdk);
-      const properties = {
+        if (!isEmpty(initialData)) {
+          setRatingValue(initialData);
+        }
+         
+        const appLocation: string = getAppLocation(appSdk);
+        const properties = {
           Stack: appSdk?.stack._data.api_key,
           Organization: appSdk?.currentUser.defaultOrganization,
           "App Location": appLocation,
           "User Id": get(appSdk, "stack._data.collaborators.0.uid", ""), // first uuid from collaborators
         };
         setErrorsMetaData(properties); // set global event data for errors
-    })
-    .catch((error) => {
-       trackError(error);
-      console.error(constants.appSdkError, error); 
-      trackEvent(APP_INITIALIZE_FAILURE);
-    });
-}, []);
-
+         if (ENV === "production") {
+          appSdk?.pulse(APP_INITIALIZE_SUCCESS,properties);
+        }
+      })
+      .catch((error) => {
+        trackError(error);
+        console.error(constants.appSdkError, error);
+        
+      });
+  }, []);
 
   const onChangeSave = (ratings: number) => {
-    setRatingValue({ value: ratings });
-    state.location?.CustomField?.field?.setData({ value: ratings / 20 });
+    setRatingValue(ratings);
+    state.location?.CustomField?.field?.setData(ratings/20);
   };
 
-  return (
-    <div className="layout-container">
-      {state.appSdkInitialized && (
-        <Rating
-          showTooltip
-          allowHalfIcon
-          ratingValue={ratingValue.value}
-          onClick={onChangeSave}
-          fillColorArray={constants.fillColorArray}
-        />
-      )}
-    </div>
-  );
+ const ratingValue = state.location?.CustomField?.field?.getData();
+ const computedRatingValue = ratingValue !== undefined ? ratingValue * 20 : 0;
+
+return (
+  <div className="layout-container">
+    {state.appSdkInitialized && (
+      <Rating
+        showTooltip
+        allowHalfIcon
+        ratingValue={computedRatingValue}
+        onClick={onChangeSave}
+        fillColorArray={constants.fillColorArray}
+      />
+    )}
+  </div>
+);
+
+
 };
 
 export default CustomField;
