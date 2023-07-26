@@ -58,22 +58,27 @@ const CustomField: React.FC = function () {
   const onChangeSave = (ratings: number) => {
     setRatingValue(ratings);
 
-    state.location?.CustomField?.field?.setData(ratings);
+    state.location?.CustomField?.field?.setData(ratings/20);
   };
 
-  return (
-    <div className="layout-container">
-      {state.appSdkInitialized && (
-        <Rating
-          showTooltip
-          allowHalfIcon
-          ratingValue={state.location?.CustomField?.field?.getData()}
-          onClick={onChangeSave}
-          fillColorArray={constants.fillColorArray}
-        />
-      )}
-    </div>
-  );
+ const ratingValue = state.location?.CustomField?.field?.getData();
+ const computedRatingValue = ratingValue !== undefined ? ratingValue * 20 : 0;
+
+return (
+  <div className="layout-container">
+    {state.appSdkInitialized && (
+      <Rating
+        showTooltip
+        allowHalfIcon
+        ratingValue={computedRatingValue}
+        onClick={onChangeSave}
+        fillColorArray={constants.fillColorArray}
+      />
+    )}
+  </div>
+);
+
+
 };
 
 export default CustomField;
