@@ -41,10 +41,6 @@ const CustomField: React.FC = function () {
           setRatingValue(initialData);
         }
          
-        if (ENV === "production") {
-          // @ts-ignore
-          appSdk?.pulse(APP_INITIALIZE_SUCCESS);
-        }
         const appLocation: string = getAppLocation(appSdk);
         const properties = {
           Stack: appSdk?.stack._data.api_key,
@@ -53,6 +49,9 @@ const CustomField: React.FC = function () {
           "User Id": get(appSdk, "stack._data.collaborators.0.uid", ""), // first uuid from collaborators
         };
         setErrorsMetaData(properties); // set global event data for errors
+         if (ENV === "production") {
+          appSdk?.pulse(APP_INITIALIZE_SUCCESS,properties);
+        }
       })
       .catch((error) => {
         trackError(error);
