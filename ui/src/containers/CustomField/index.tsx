@@ -19,7 +19,9 @@ const CustomField: React.FC = function () {
   const { setErrorsMetaData, trackError } = useJsErrorTracker();
   const [, setRatingValue] = useState<number>(0);
   const { APP_INITIALIZE_SUCCESS } = eventNames;
-  const  [,setAppSdk] = useAppSdk();
+  const [, setAppSdk] = useAppSdk();
+  
+  const ENV: string = process.env.NODE_ENV || "";
 
   useEffect(() => {
     ContentstackAppSdk.init()
@@ -38,8 +40,11 @@ const CustomField: React.FC = function () {
         if (!isEmpty(initialData)) {
           setRatingValue(initialData);
         }
-         // @ts-ignore
-        appSdk?.pulse(APP_INITIALIZE_SUCCESS);
+         
+        if (ENV === "production") {
+          // @ts-ignore
+          appSdk?.pulse(APP_INITIALIZE_SUCCESS);
+        }
         const appLocation: string = getAppLocation(appSdk);
         const properties = {
           Stack: appSdk?.stack._data.api_key,
