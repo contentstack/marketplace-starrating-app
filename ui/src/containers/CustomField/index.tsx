@@ -7,7 +7,6 @@ import constants, { eventNames } from "../../common/constants";
 import "./styles.scss";
 import getAppLocation from "../../common/functions";
 import useJsErrorTracker from "../../common/hooks/useJsErrorTracker";
-import { useAppSdk } from "../../common/hooks/useAppSdk";
 
 const CustomField: React.FC = function () {
   const [state, setState] = useState<TypeSDKData>({
@@ -19,14 +18,12 @@ const CustomField: React.FC = function () {
   const { setErrorsMetaData, trackError } = useJsErrorTracker();
   const [, setRatingValue] = useState<number>(0);
   const { APP_INITIALIZE_SUCCESS } = eventNames;
-  const [, setAppSdk] = useAppSdk();
   
   const ENV: string = process.env.NODE_ENV || "";
 
   useEffect(() => {
     ContentstackAppSdk.init()
       .then(async (appSdk) => {
-        setAppSdk(appSdk);
         const config = await appSdk?.getConfig();
 
         setState({
