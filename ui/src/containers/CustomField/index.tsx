@@ -47,7 +47,7 @@ const CustomField: React.FC = function () {
         };
         setErrorsMetaData(properties); // set global event data for errors
          if (ENV === "production") {
-          appSdk?.pulse(APP_INITIALIZE_SUCCESS,properties);
+          appSdk?.pulse(APP_INITIALIZE_SUCCESS,{ property: "App loaded Successfully",app_name:"Star Ratings", app_location:"CustomField" });
         }
       })
       .catch((error) => {
