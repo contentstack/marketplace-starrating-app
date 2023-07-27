@@ -8,4 +8,8 @@ const constants: any = {
   ],
 };
 
+export const eventNames = Object.freeze({
+  APP_INITIALIZE_SUCCESS: "Viewed",
+});
+
 export default constants;
