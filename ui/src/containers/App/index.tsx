@@ -2,7 +2,6 @@ import React from "react";
 import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import CustomField from "../CustomField";
-import "@contentstack/venus-components/build/main.css";
 import "./styles.scss";
 
 /** HomeRedirectHandler - component to nandle redirect based on the window location pathname,

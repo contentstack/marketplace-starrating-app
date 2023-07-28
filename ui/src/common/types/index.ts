@@ -4,6 +4,6 @@ export interface TypeSDKData {
   appSdkInitialized: boolean;
 }
 
-export interface TypeStarRatingData {
+export interface StarRatingDataType {
   value: number;
 }
