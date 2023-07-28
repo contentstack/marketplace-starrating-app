@@ -1,10 +1,9 @@
 {
   "name": "marketplace-starrating-app-ui",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "dependencies": {
     "@contentstack/app-sdk": "^1.5.0",
-    "@contentstack/venus-components": "^2.1.0",
     "@datadog/browser-rum": "^4.42.1",
     "@types/node": "^20.3.3",
     "@types/react": "^18.2.14",
@@ -63,8 +62,10 @@
     "@testing-library/jest-dom": "^5.16.0",
     "@testing-library/react": "^12.1.2",
     "@types/jest": "^26.0.14",
+    "@types/lodash": "^4.14.196",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
+    "axios": "^1.4.0",
     "babel-jest": "^26.6.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.0",
