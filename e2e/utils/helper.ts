@@ -1,11 +1,12 @@
-// module dependencies
+// ... existing code ...
 import { Page } from "@playwright/test";
 import { EntryPage } from "../pages/EntryPage";
-const axios = require("axios");
-const jsonfile = require("jsonfile");
-const FormData = require("form-data");
-const path = require("path");
-const fs = require("fs");
+import axios from "axios";
+import jsonfile from "jsonfile";
+import FormData from "form-data";
+import path from "path";
+import fs from "fs";
+
 
 interface ExtensionUid {
   uid: string;
@@ -135,7 +136,7 @@ export const createApp = async (
       authtoken: authToken,
     },
     data: {
-      name: `Color Picker E2E ${randomTestNumber}`,
+      name: `Star Rating E2E ${randomTestNumber}`,
       target_type: "stack",
     },
   };

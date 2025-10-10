@@ -60,64 +60,15 @@ export class EntryPage {
     expect(matchText).toBe("Dashboard Widget");
   }
 
-  // Check for entry custom field & entry side bar
-  async ValidateColorPicker(appName: string) {
+  // Check for star rating custom field
+  async validateStarRating(appName: string) {
     await this.page.waitForTimeout(3000);
 
     const frame: FrameLocator = this.page.frameLocator(
       `iframe[title="${initParams.customFieldTitlePrefix}${appName}"]`
     );
-    const colorPicker: Locator = frame.locator(".layout-container").first();
-    await colorPicker.waitFor();
-    await expect(colorPicker).toBeVisible();
-  }
-  async interactColorPicker() {
-    const frame = await this.accessFrame();
-    const colorPicker: Locator = frame!
-      .locator(".layout-container .swatch")
-      .first();
-    await colorPicker.waitFor();
-    await expect(colorPicker).toBeVisible();
-    await colorPicker.click(); // Click on the swatch to open the color picker popover
-    const colorPickerPopover: Locator = frame!
-      .locator(".layout-container .popover")
-      .first();
-    await colorPickerPopover.waitFor();
-    await expect(colorPickerPopover).toBeVisible();
-
-    const hexInput: Locator = colorPickerPopover.locator(
-      "#rc-editable-input-1"
-    );
-    await hexInput.waitFor();
-    await expect(hexInput).toBeVisible();
-
-    const RInput: Locator = colorPickerPopover.locator("#rc-editable-input-2");
-    await RInput.waitFor();
-    await expect(RInput).toBeVisible();
-
-    const GInput: Locator = colorPickerPopover.locator("#rc-editable-input-3");
-    await GInput.waitFor();
-    await expect(GInput).toBeVisible();
-
-    const BInput: Locator = colorPickerPopover.locator("#rc-editable-input-4");
-    await BInput.waitFor();
-    await expect(BInput).toBeVisible();
-
-    const AInput: Locator = colorPickerPopover.locator("#rc-editable-input-5");
-    await AInput.waitFor();
-    await expect(AInput).toBeVisible();
-
-    await hexInput.click();
-    await hexInput.fill("A1F02E");
-
-    const RValue: string = await RInput.inputValue();
-    const GValue: string = await GInput.inputValue();
-    const BValue: string = await BInput.inputValue();
-    const AValue: string = await AInput.inputValue();
-
-    expect(RValue).toBe("161");
-    expect(GValue).toBe("240");
-    expect(BValue).toBe("46");
-    expect(AValue).toBe("100");
+    const starRating: Locator = frame.locator(".layout-container").first();
+    await starRating.waitFor();
+    await expect(starRating).toBeVisible();
   }
 }
