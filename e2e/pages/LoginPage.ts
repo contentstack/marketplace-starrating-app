@@ -14,7 +14,9 @@ export class LoginPage {
     this.emailInput = page.locator("#email");
     this.passwordInput = page.locator("#pw");
     this.venusPasswordInput = page.locator("#password");
-    this.loginButton = page.locator('button:has-text("Log In"), button:has-text("LOGIN")');
+    this.loginButton = page.locator(
+      'button:has-text("Log In"), button:has-text("LOGIN")'
+    );
   }
 
   // Define methods
@@ -46,7 +48,9 @@ export class LoginPage {
         // Contentstack venus UI login
         await this.emailInput.type(email);
         await this.venusPasswordInput.type(password);
-        const venusLoginButton = await this.page.waitForSelector('button:has-text("Log In")');
+        const venusLoginButton = await this.page.waitForSelector(
+          'button:has-text("Log In")'
+        );
         await venusLoginButton.click();
         await this.page.waitForTimeout(2000);
         await this.page.context().storageState({ path: "storageState.json" });

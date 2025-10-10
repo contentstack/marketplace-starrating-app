@@ -11,7 +11,15 @@ interface ExtensionUid {
   uid: string;
 }
 
-const { STACK_API_KEY, ORG_ID, APP_BASE_URL, EMAIL, PASSWORD, DEVELOPER_HUB_API, BASE_API_URL }: any = process.env;
+const {
+  STACK_API_KEY,
+  ORG_ID,
+  APP_BASE_URL,
+  EMAIL,
+  PASSWORD,
+  DEVELOPER_HUB_API,
+  BASE_API_URL,
+}: any = process.env;
 
 const file = "data.json";
 
@@ -23,7 +31,10 @@ export const initializeEntry = async (page: Page) => {
 };
 
 // entry page access
-export const entryPageFlow = async (savedCredentials: { contentTypeId: any; entryUid: any }, entryPage: EntryPage) => {
+export const entryPageFlow = async (
+  savedCredentials: { contentTypeId: any; entryUid: any },
+  entryPage: EntryPage
+) => {
   //navigate to stacks page
   const { contentTypeId, entryUid } = savedCredentials;
   await entryPage.navigateToEntry(STACK_API_KEY, contentTypeId, entryUid);
@@ -39,7 +50,10 @@ const writeFile = async (obj: any) => {
 };
 
 // Upload an asset to the stack
-export const assetUpload = async (stackApiKey: string | undefined, authToken: string) => {
+export const assetUpload = async (
+  stackApiKey: string | undefined,
+  authToken: string
+) => {
   const assetPath = await path.resolve(__dirname, "../../public/logo192.png");
   const readFile = await fs.createReadStream(assetPath);
   const form = new FormData();
@@ -108,7 +122,10 @@ interface AppData {
 }
 
 // create app in developer hub
-export const createApp = async (authToken: string, randomTestNumber: number): Promise<AppData | any> => {
+export const createApp = async (
+  authToken: string,
+  randomTestNumber: number
+): Promise<AppData | any> => {
   let options = {
     url: `https://${DEVELOPER_HUB_API}/apps`,
     method: "POST",
@@ -131,7 +148,11 @@ export const createApp = async (authToken: string, randomTestNumber: number): Pr
 };
 
 // updating app in developer hub & set baseUrl
-export const updateApp = async (authToken: string, appId: string, appName: string): Promise<any> => {
+export const updateApp = async (
+  authToken: string,
+  appId: string,
+  appName: string
+): Promise<any> => {
   const name = appName;
   let options = {
     url: `https://${DEVELOPER_HUB_API}/apps/${appId}`,
@@ -159,7 +180,9 @@ export const updateApp = async (authToken: string, appId: string, appName: strin
             type: "cs.cm.stack.dashboard",
             meta: [
               {
-                name: `Stack Dashboard Boilerplate _${Math.floor(Math.random() * 1000)}`,
+                name: `Stack Dashboard Boilerplate _${Math.floor(
+                  Math.random() * 1000
+                )}`,
                 path: "/stack-dashboard",
                 signed: false,
                 enabled: true,
@@ -171,7 +194,9 @@ export const updateApp = async (authToken: string, appId: string, appName: strin
             type: "cs.cm.stack.asset_sidebar",
             meta: [
               {
-                name: `Asset Sidebar Boilerplate _${Math.floor(Math.random() * 1000)}`,
+                name: `Asset Sidebar Boilerplate _${Math.floor(
+                  Math.random() * 1000
+                )}`,
                 path: "/asset-sidebar",
                 signed: false,
                 enabled: true,
@@ -183,7 +208,9 @@ export const updateApp = async (authToken: string, appId: string, appName: strin
             type: "cs.cm.stack.rte",
             meta: [
               {
-                name: `JsonRte Boilerplate _${Math.floor(Math.random() * 1000)}`,
+                name: `JsonRte Boilerplate _${Math.floor(
+                  Math.random() * 1000
+                )}`,
                 enabled: true,
                 path: "/json-rte.js",
               },
@@ -248,7 +275,11 @@ export const getInstalledApp = async (authToken: string, appId: string) => {
 };
 
 // install app in stack & return installation id
-export const installApp = async (authToken: string, appId: string, stackApiKey: string | undefined) => {
+export const installApp = async (
+  authToken: string,
+  appId: string,
+  stackApiKey: string | undefined
+) => {
   let options = {
     url: `https://${DEVELOPER_HUB_API}/apps/${appId}/install`,
     method: "POST",
@@ -308,7 +339,11 @@ export const deleteApp = async (token: string, appId: string) => {
 };
 
 // create content-type
-export const createContentType = async (authToken: string, appName: string, extension_uid: ExtensionUid[]) => {
+export const createContentType = async (
+  authToken: string,
+  appName: string,
+  extension_uid: ExtensionUid[]
+) => {
   // const contentTypeTitle = `${appName} : Content Type`;
   let options = {
     url: `https://${BASE_API_URL}/v3/content_types`,
@@ -370,7 +405,11 @@ export const createContentType = async (authToken: string, appName: string, exte
 };
 
 // create entry
-export const createEntry = async (authToken: string, appName: string, contentTypeId: string) => {
+export const createEntry = async (
+  authToken: string,
+  appName: string,
+  contentTypeId: string
+) => {
   let generateTitle = `${appName} : Entry`;
   let options = {
     url: `https://${BASE_API_URL}/v3/content_types/${contentTypeId}/entries`,
@@ -403,7 +442,10 @@ export const createEntry = async (authToken: string, appName: string, contentTyp
 };
 
 // deletes the created content type during tear down
-export const deleteContentType = async (token: string, contentTypeId: string) => {
+export const deleteContentType = async (
+  token: string,
+  contentTypeId: string
+) => {
   let options = {
     url: `https://${BASE_API_URL}/v3/content_types/${contentTypeId}`,
     method: "DELETE",

@@ -46,13 +46,25 @@ test.beforeAll(async () => {
 
       savedCredentials["appId"] = appId;
       const appUpdated = await updateApp(authToken, appId, appName);
-      const installationId: string = await installApp(authToken, appId, process.env.STACK_API_KEY);
+      const installationId: string = await installApp(
+        authToken,
+        appId,
+        process.env.STACK_API_KEY
+      );
       savedCredentials["installationId"] = installationId;
       const extensionUid = await getExtensionFieldUid(authToken);
-      const contentTypeResp = await createContentType(authToken, appName, extensionUid);
+      const contentTypeResp = await createContentType(
+        authToken,
+        appName,
+        extensionUid
+      );
       if (contentTypeResp.notice === "Content Type created successfully.") {
         savedCredentials["contentTypeId"] = contentTypeResp.content_type.uid;
-        const entryResp = await createEntry(authToken, appName, contentTypeResp.content_type.uid);
+        const entryResp = await createEntry(
+          authToken,
+          appName,
+          contentTypeResp.content_type.uid
+        );
         savedCredentials["entryUid"] = entryResp.entry.uid;
         savedCredentials["entryTitle"] = entryResp.entry.title;
         savedCredentials["appId"] = appId;
