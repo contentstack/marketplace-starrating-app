@@ -11,7 +11,6 @@ import "./styles.scss";
 const CustomField: React.FC = function () {
   const [customField, setFieldData] = useCustomField();
   const appSdk = useAppSdk();
-  console.log("appSdk", appSdk);
 
   const onChangeSave = async (ratings: number) => {
     const selectedRating = ratings / 20;
