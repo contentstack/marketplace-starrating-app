@@ -15,7 +15,7 @@ import {
   getExtensionFieldUid,
 } from "../utils/helper";
 
-const jsonFile = require("jsonfile");
+import jsonFile from "jsonfile";
 
 let randomTestNumber = Math.floor(Math.random() * 1000);
 
@@ -85,10 +85,9 @@ test.afterAll(async () => {
   await deleteContentType(authToken, savedCredentials.contentTypeId);
 });
 
-test("#1 Validate Color Picker", async ({ page, context }) => {
+test("#1 Validate Star Rating", async ({ page, context }) => {
   const { appName } = savedCredentials;
   const entryPage = await initializeEntry(page);
   await entryPageFlow(savedCredentials, entryPage);
-  await entryPage.ValidateColorPicker(appName);
-  await entryPage.interactColorPicker();
+  await entryPage.validateStarRating(appName);
 });

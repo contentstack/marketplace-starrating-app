@@ -51,8 +51,6 @@ npm run test:chrome
 # Build the application
 npm run build
 
-# The built files will be in the `dist` directory
-
 #Serve the application
 npm run serve
 
@@ -161,7 +159,17 @@ This project uses:
 
 This project follows [Conventional Commits](https://www.conventionalcommits.org/):
 
-```
+## 🤝 Contributing
+
+We welcome contributions! Please see the following guide for details.
+
+### How to Contribute
+
+1.  Fork the repository.
+2.  Create a feature branch (`git checkout -b feature/amazing-feature`).
+3.  Commit your changes (`git commit -m 'feat: add amazing feature'`).
+4.  Push to the branch (`git push origin feature/amazing-feature`).
+5.  Open a Pull Request.
 
 ## 📄 License
 
@@ -169,19 +177,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- [Contentstack](https://www.contentstack.com/) for the marketplace platform
-- Community contributors for feedback and improvements
+- [Contentstack](https://www.contentstack.com/) for the amazing CMS platform.
 
 ## 📞 Support
 
 - **Issues**: [GitHub Issues](https://github.com/contentstack/marketplace-starrating-app/issues)
 - **Documentation**: [Contentstack Developer Hub](https://www.contentstack.com/docs/developers/developer-hub)
-- **Playwright**: [Playwright](https://playwright.dev/)
-- **Marketplace Star Rating App**: [Marketplace Star Rating App](https://www.contentstack.com/docs/developers/marketplace-apps/star-ratings)
+- **Marketplace**: [Contentstack Marketplace App Guide](https://www.contentstack.com/docs/developers/marketplace-apps/star-ratings)
 - **Community**: [Contentstack Community](https://community.contentstack.com/)
 
 ---
 
 Made with ⭐ by the Contentstack team
 
-```
