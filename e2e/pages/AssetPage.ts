@@ -19,7 +19,9 @@ export class AssetPage {
 
   // navigate to an asset
   async navigateToAsset(assetUid: string) {
-    await this.page.goto(`/#!/stack/${process.env.STACK_API_KEY}/assets/${assetUid}`);
+    await this.page.goto(
+      `/#!/stack/${process.env.STACK_API_KEY}/assets/${assetUid}`
+    );
     await this.page.waitForLoadState();
   }
 
@@ -31,7 +33,9 @@ export class AssetPage {
 
   // Return iframe
   async accessFrame() {
-    const elementHandle = await this.page.waitForSelector("div.cs-extension iframe");
+    const elementHandle = await this.page.waitForSelector(
+      "div.cs-extension iframe"
+    );
     const frame = await elementHandle.contentFrame();
     return frame;
   }

@@ -25,8 +25,14 @@ export class EntryPage {
   }
 
   // navigate to entry page
-  async navigateToEntry(apiKey: string, contentTypeUID: string, entryUID: string) {
-    await this.page.goto(`/#!/stack/${apiKey}/content-type/${contentTypeUID}/en-us/entry/${entryUID}/edit`);
+  async navigateToEntry(
+    apiKey: string,
+    contentTypeUID: string,
+    entryUID: string
+  ) {
+    await this.page.goto(
+      `/#!/stack/${apiKey}/content-type/${contentTypeUID}/en-us/entry/${entryUID}/edit`
+    );
     await this.page.waitForLoadState();
   }
 
@@ -38,7 +44,9 @@ export class EntryPage {
 
   // Return iframe
   async accessFrame() {
-    const elementHandle = await this.page.waitForSelector("div.cs-extension iframe");
+    const elementHandle = await this.page.waitForSelector(
+      "div.cs-extension iframe"
+    );
     const frame = await elementHandle.contentFrame();
     return frame;
   }
@@ -65,15 +73,21 @@ export class EntryPage {
   }
   async interactColorPicker() {
     const frame = await this.accessFrame();
-    const colorPicker: Locator = frame!.locator(".layout-container .swatch").first();
+    const colorPicker: Locator = frame!
+      .locator(".layout-container .swatch")
+      .first();
     await colorPicker.waitFor();
     await expect(colorPicker).toBeVisible();
     await colorPicker.click(); // Click on the swatch to open the color picker popover
-    const colorPickerPopover: Locator = frame!.locator(".layout-container .popover").first();
+    const colorPickerPopover: Locator = frame!
+      .locator(".layout-container .popover")
+      .first();
     await colorPickerPopover.waitFor();
     await expect(colorPickerPopover).toBeVisible();
 
-    const hexInput: Locator = colorPickerPopover.locator("#rc-editable-input-1");
+    const hexInput: Locator = colorPickerPopover.locator(
+      "#rc-editable-input-1"
+    );
     await hexInput.waitFor();
     await expect(hexInput).toBeVisible();
 
