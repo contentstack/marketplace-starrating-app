@@ -1,7 +1,5 @@
-
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
+
 node_modules/
 /api/node_modules
 /ui/node_modules
@@ -11,7 +9,9 @@ node_modules/
 # production
 /api/build
 /ui/build
-to-deploy/
+/to-deploy
+build
+dist
 
 # misc
 .DS_Store
@@ -22,10 +22,13 @@ to-deploy/
 /**/**/yarn-error.log*
 
 .vercel
-
-.eslintcache
-.dccache
 .env
-ui/.env
+.eslintcache
+
 playwright-report
+
 storageState.json
+
+data.json
+
+
