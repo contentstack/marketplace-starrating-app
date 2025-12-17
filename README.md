@@ -127,7 +127,7 @@ The app configuration is defined in `update-app-info.json`:
           {
             "signed": true,
             "path": "/custom-field",
-            "data_type": "number"
+            "data_type": "json"
           }
         ]
       }
@@ -189,4 +189,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 Made with ⭐ by the Contentstack team
-

@@ -1,8 +1,7 @@
-import type { PlaywrightTestConfig } from "@playwright/test";
-import { devices } from "@playwright/test";
+import { defineConfig, devices } from "@playwright/test";
 import "dotenv/config";
 
-const config: PlaywrightTestConfig = {
+export default defineConfig({
   /**
    * globalSetup & teardown of test data
    */
@@ -57,6 +56,4 @@ const config: PlaywrightTestConfig = {
       },
     },
   ],
-};
-
-export default config;
+});

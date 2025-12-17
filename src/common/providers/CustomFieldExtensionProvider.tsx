@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
-import { useAppLocation } from "../hooks/useAppLocation";
 import { isEmpty } from "lodash";
+import { useCallback, useEffect, useState } from "react";
 import { CustomFieldExtensionContext } from "../contexts/customFieldExtensionContext";
+import { useAppLocation } from "../hooks/useAppLocation";
 
 export const CustomFieldExtensionProvider = ({ children }: any) => {
   const [customField, setCustomField] = useState<unknown>(null);
@@ -13,7 +13,7 @@ export const CustomFieldExtensionProvider = ({ children }: any) => {
       // check if the data was loaded earlier or not
       if (isEmpty(customField)) {
         setLoading(true);
-        let fieldData = await location.field.getData();
+        const fieldData = await location.field.getData();
         setCustomField(fieldData);
         setLoading(false);
       }
