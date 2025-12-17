@@ -5,7 +5,7 @@
 [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
 [![Playwright](https://img.shields.io/badge/Playwright-1.25.0-green.svg)](https://playwright.dev/)
 
-A modern, accessible star rating custom field extension for Contentstack marketplace apps. This React-based application provides an intuitive rating interface that integrates seamlessly with Contentstack's content management system.
+A modern, accessible star rating custom field extension for Contentstack marketplace apps. This React-based application provides an intuitive rating interface that integrates seamlessly with Contentstack's content management system
 
 ## ⭐ Features
 
