@@ -9,7 +9,7 @@
           {
             "signed": true,
             "path": "/custom-field",
-            "data_type": "number"
+            "data_type": "json"
           }
         ]
       }

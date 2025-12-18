@@ -1,5 +1,7 @@
 import { expect, FrameLocator, Locator, Page } from "@playwright/test";
-import initParams from "../fixtures/initParams.json";
+const initParams = {
+  customFieldTitlePrefix: "Custom field - ",
+};
 
 export class EntryPage {
   // Define selectors

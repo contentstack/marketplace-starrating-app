@@ -6,11 +6,11 @@ import UiLocation from "@contentstack/app-sdk/dist/src/uiLocation";
 import { get, isNull } from "lodash";
 
 import { AppFailed } from "../../components/AppFailed";
+import { eventNames } from "../constants";
 import { MarketplaceAppContext } from "../contexts/marketplaceContext";
+import getAppLocation from "../functions";
 import { useJSErrorTracking } from "../hooks/useJsErrorTracker";
 import { KeyValueObj } from "../types";
-import getAppLocation from "../functions";
-import { eventNames } from "../constants";
 
 type ProviderProps = {
   children?: React.ReactNode;
@@ -38,7 +38,7 @@ export const MarketplaceAppProvider: React.FC<ProviderProps> = ({
         setConfig(appConfig);
         appSdk.location.CustomField?.frame?.updateHeight?.(350);
         const appLocation: string = getAppLocation(appSdk);
-        let properties = {
+        const properties = {
           Stack: appSdk?.stack._data.api_key,
           Organization: appSdk?.currentUser.defaultOrganization,
           "App Location": appLocation,
