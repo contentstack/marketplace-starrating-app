@@ -89,5 +89,5 @@ test("#1 Validate Star Rating", async ({ page, context }) => {
   const { appName } = savedCredentials;
   const entryPage = await initializeEntry(page);
   await entryPageFlow(savedCredentials, entryPage);
-  await entryPage.validateStarRating(appName);
+  await entryPage.validateStarRatingField();
 });
