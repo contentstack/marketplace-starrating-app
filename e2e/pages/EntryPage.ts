@@ -63,9 +63,9 @@ export class EntryPage {
   }
 
   // Check for star rating custom field
-  async validateStarRating(appName: string) {
+  async validateStarRatingField() {
     await this.page.waitForTimeout(3000);
-
+    const appName = "Star Ratings";
     const frame: FrameLocator = this.page.frameLocator(
       `iframe[title="${initParams.customFieldTitlePrefix}${appName}"]`
     );
