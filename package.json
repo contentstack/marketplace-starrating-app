@@ -75,7 +75,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^16.2.4",
-    "@cucumber/cucumber": "^12.2.0",
+    "@cucumber/cucumber": "^12.9.0",
     "@eslint/js": "^9.36.0",
     "@playwright/test": "^1.57.0",
     "@testing-library/jest-dom": "^5.16.4",
