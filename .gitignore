@@ -34,3 +34,7 @@ data.json
 test-results/
 
 
+
+# build and test output
+coverage/
+*.tsbuildinfo

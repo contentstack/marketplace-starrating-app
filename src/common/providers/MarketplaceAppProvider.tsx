@@ -10,7 +10,7 @@ import { eventNames } from "../constants";
 import { MarketplaceAppContext } from "../contexts/marketplaceContext";
 import getAppLocation from "../functions";
 import { useJSErrorTracking } from "../hooks/useJsErrorTracker";
-import { KeyValueObj } from "../types";
+import type { KeyValueObj } from "../types";
 
 type ProviderProps = {
   children?: React.ReactNode;
