@@ -5,7 +5,7 @@
 import { useContext } from "react";
 import {
   MarketplaceAppContext,
-  MarketplaceAppContextType,
+  type MarketplaceAppContextType,
 } from "../contexts/marketplaceContext";
 
 /**

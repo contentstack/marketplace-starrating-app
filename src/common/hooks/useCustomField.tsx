@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import {
   CustomFieldExtensionContext,
-  CustomFieldExtensionContextType,
+  type CustomFieldExtensionContextType,
 } from "../contexts/customFieldExtensionContext";
 
 /**
