@@ -59,4 +59,15 @@ describe("CustomFieldExtensionProvider", () => {
     });
     expect(view.ctx.customField).toEqual({ value: 1 });
   });
+
+  // BUG: MKT-20762 - setFieldData has no try/finally, so `loading` stays true when setData rejects.
+  it.skip("returns loading to false when setData rejects", async () => {
+    const setData = vi.fn().mockRejectedValue(new Error("nope"));
+    const view = setup({ getData: vi.fn().mockResolvedValue({ value: 1 }), setData });
+    await act(async () => {});
+    await act(async () => {
+      await view.ctx.setFieldData({ value: 5 }).catch(() => {});
+    });
+    expect(view.ctx.loading).toBe(false);
+  });
 });
