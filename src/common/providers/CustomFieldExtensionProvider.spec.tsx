@@ -66,7 +66,7 @@ describe("CustomFieldExtensionProvider", () => {
     const view = setup({ getData: vi.fn().mockResolvedValue({ value: 1 }), setData });
     await act(async () => {});
     await act(async () => {
-      await view.ctx.setFieldData({ value: 5 }).catch(() => {});
+      await Promise.resolve(view.ctx.setFieldData({ value: 5 })).catch(() => {});
     });
     expect(view.ctx.loading).toBe(false);
   });
