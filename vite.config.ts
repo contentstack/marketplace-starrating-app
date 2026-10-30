@@ -13,8 +13,8 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       include: ["src/**/*.{ts,tsx}"],
-      exclude: ["src/**/*.spec.{ts,tsx}", "src/**/*.d.ts", "src/index.tsx", "src/reportWebVitals.ts", "src/common/types/**"],
-      thresholds: { lines: 90, branches: 90, functions: 90, statements: 90 },
+      exclude: ["src/**/*.spec.{ts,tsx}", "src/**/*.d.ts", "src/common/types/**"],
+      thresholds: { lines: 99, branches: 93, functions: 94, statements: 99 },
     },
   },
 });
