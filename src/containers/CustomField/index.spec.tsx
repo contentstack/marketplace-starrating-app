@@ -1,4 +1,4 @@
-import { act, cleanup, render } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 import { Rating } from "react-simple-star-rating";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -35,7 +35,6 @@ const renderField = (opts: {
 };
 
 afterEach(() => {
-  cleanup();
   vi.restoreAllMocks();
   ratingMock.mockClear();
 });

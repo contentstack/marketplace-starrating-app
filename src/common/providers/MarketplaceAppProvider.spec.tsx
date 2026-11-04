@@ -1,23 +1,20 @@
 import ContentstackAppSDK from "@contentstack/app-sdk";
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { useContext } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { MarketplaceAppContext } from "../contexts/marketplaceContext";
+import { fakeId, makeSdk as makeFakeSdk } from "../../test-utils/sdk";
 import { MarketplaceAppProvider } from "./MarketplaceAppProvider";
-
-// Built at runtime so secret scanners do not mistake the fixture for a real key.
-const fakeId = (kind: string) => [kind, "id"].join("_");
 
 vi.mock("@contentstack/app-sdk", () => ({ default: { init: vi.fn() } }));
 
-const makeSdk = () => ({
-  location: { CustomField: { frame: { updateHeight: vi.fn() } } },
-  getConfig: vi.fn().mockResolvedValue({ key: "cfg" }),
-  pulse: vi.fn(),
-  stack: { _data: { api_key: fakeId("stack"), collaborators: [{ uid: "u1" }] } },
-  currentUser: { defaultOrganization: "org1" },
-});
+const makeSdk = () => {
+  const { sdk } = makeFakeSdk();
+  sdk.getConfig.mockResolvedValue({ key: "cfg" });
+  sdk.currentUser.defaultOrganization = "org1";
+  return sdk;
+};
 
 const Consumer = () => {
   const { appSdk, appConfig } = useContext(MarketplaceAppContext);
@@ -32,7 +29,6 @@ const mountWith = (sdk: ReturnType<typeof makeSdk>) => {
 };
 
 afterEach(() => {
-  cleanup();
   vi.unstubAllEnvs();
   vi.clearAllMocks();
 });

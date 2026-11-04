@@ -1,31 +1,21 @@
 import ContentstackAppSDK from "@contentstack/app-sdk";
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { makeSdk } from "../../test-utils/sdk";
 import App from ".";
 
 vi.mock("@contentstack/app-sdk", () => ({ default: { init: vi.fn() } }));
 
-// Built at runtime so secret scanners do not mistake the fixture for a real key.
-const fakeId = (kind: string) => [kind, "id"].join("_");
-
-const getData = vi.fn();
+const { sdk, getData } = makeSdk();
 const mountAt = async (path: string, windowPath = path) => {
   window.history.pushState({}, "", windowPath);
-  getData.mockResolvedValue({ value: 2 });
-  vi.mocked(ContentstackAppSDK.init).mockResolvedValue({
-    location: { CustomField: { field: { getData, setData: vi.fn() }, frame: { updateHeight: vi.fn() } } },
-    getConfig: vi.fn().mockResolvedValue({}),
-    pulse: vi.fn(),
-    stack: { _data: { api_key: fakeId("stack") } },
-    currentUser: { defaultOrganization: "o" },
-  } as never);
+  vi.mocked(ContentstackAppSDK.init).mockResolvedValue(sdk as never);
   return render(<MemoryRouter initialEntries={[path]}><App /></MemoryRouter>);
 };
 
 afterEach(() => {
-  cleanup();
   vi.clearAllMocks();
   window.history.pushState({}, "", "/");
 });

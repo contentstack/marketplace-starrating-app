@@ -9,11 +9,13 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
+    setupFiles: ["src/setupTests.ts"],
     include: ["src/**/*.spec.{ts,tsx}"],
+    css: false,
     coverage: {
       provider: "v8",
       include: ["src/**/*.{ts,tsx}"],
-      exclude: ["src/**/*.spec.{ts,tsx}", "src/**/*.d.ts", "src/common/types/**"],
+      exclude: ["src/**/*.spec.{ts,tsx}", "src/**/*.d.ts", "src/setupTests.ts", "src/test-utils/**", "src/common/types/**"],
       thresholds: { lines: 99, branches: 93, functions: 94, statements: 99 },
     },
   },

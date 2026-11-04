@@ -1,6 +1,6 @@
-import { act, cleanup, render } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 import { useContext, type ReactNode } from "react";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import {
   CustomFieldExtensionContext,
@@ -8,8 +8,6 @@ import {
 } from "../contexts/customFieldExtensionContext";
 import { MarketplaceAppContext } from "../contexts/marketplaceContext";
 import { CustomFieldExtensionProvider } from "./CustomFieldExtensionProvider";
-
-afterEach(cleanup);
 
 const setup = (field: { getData: () => Promise<unknown>; setData: (d: unknown) => Promise<void> }) => {
   // Stable sdk so the provider's effect deps do not change between renders.
@@ -60,8 +58,9 @@ describe("CustomFieldExtensionProvider", () => {
     expect(view.ctx.customField).toEqual({ value: 1 });
   });
 
-  // BUG: MKT-20762 - setFieldData has no try/finally, so `loading` stays true when setData rejects.
-  it.skip("returns loading to false when setData rejects", async () => {
+  // KNOWN BUG MKT-20762 (it.fails: passes while the bug exists; turn into it() when fixed).
+  // setFieldData has no try/finally, so `loading` stays true when setData rejects.
+  it.fails("returns loading to false when setData rejects", async () => {
     const setData = vi.fn().mockRejectedValue(new Error("nope"));
     const view = setup({ getData: vi.fn().mockResolvedValue({ value: 1 }), setData });
     await act(async () => {});

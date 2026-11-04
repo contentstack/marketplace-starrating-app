@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import ErrorBoundary from ".";
 
@@ -6,10 +6,7 @@ const Boom = () => {
   throw new Error("boom");
 };
 
-afterEach(() => {
-  cleanup();
-  vi.restoreAllMocks();
-});
+afterEach(() => vi.restoreAllMocks());
 
 describe("ErrorBoundary", () => {
   it("renders children when nothing throws", () => {
