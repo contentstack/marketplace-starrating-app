@@ -232,7 +232,7 @@ export const updateApp = async (
             meta: [
               {
                 name: name,
-                path: "/custom-field",
+                path: "/#/custom-field",
                 signed: false,
                 enabled: true,
                 data_type: "json",

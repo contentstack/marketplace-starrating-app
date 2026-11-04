@@ -126,7 +126,7 @@ The app configuration is defined in `update-app-info.json`:
         "meta": [
           {
             "signed": true,
-            "path": "/custom-field",
+            "path": "/#/custom-field",
             "data_type": "json"
           }
         ]
