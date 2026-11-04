@@ -3,7 +3,7 @@ import { Rating } from "react-simple-star-rating";
 
 import { useCustomField } from "../../common/hooks/useCustomField";
 import { useAppSdk } from "../../common/hooks/useAppSdk";
-import { StarRatingDataType } from "../../common/types";
+import type { StarRatingDataType } from "../../common/types";
 import constants from "../../common/constants";
 
 import "./styles.scss";
