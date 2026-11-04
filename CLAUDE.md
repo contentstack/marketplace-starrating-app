@@ -18,7 +18,7 @@ Star Ratings: a Marketplace custom field (Tier 1, UI-only) that saves `{ "value"
 | Install | `npm ci` |
 | Run locally | `npm run dev` (http://localhost:3000; the field only renders inside Contentstack) |
 | Lint / typecheck | `npm run lint` · `npm run typecheck` |
-| Unit tests | `npm test` · `npm run test:coverage` (fails under 90%) |
+| Unit tests | `npm test` · `npm run test:coverage` (gate: lines 99, statements 99, functions 94, branches 93) |
 | Build | `npm run build` (output `dist/`; leaves the tree clean) |
 
 - Tests are Vitest specs next to the code (`*.spec.tsx`). Expected values come from the spec, not from running the code.
